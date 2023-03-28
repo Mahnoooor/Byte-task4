@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:name/screen1.dart';
+import 'package:name/screen3.dart';
 import 'package:name/textfield.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Screen2 extends StatelessWidget {
@@ -48,7 +51,7 @@ SizedBox(height: 4.h,),
                 color: Colors.white,
               ),
                     
-                    child: TextButton(onPressed: (){}, child: Text("Register", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.black,fontWeight: FontWeight.bold),),),
+                    child: TextButton(onPressed: (){Get.to(Screen1());}, child: Text("Register", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.black,fontWeight: FontWeight.bold),),),
                   ),
                   Container(
                     width: 28.w,
@@ -58,7 +61,7 @@ SizedBox(height: 4.h,),
                 color: Color.fromARGB(255, 24, 34, 22),
               ),
                     
-                    child: TextButton(onPressed: (){}, child: Text("Sign In", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey,fontWeight: FontWeight.bold),),)
+                    child: TextButton(onPressed: (){Get.to(Screen3());}, child: Text("Sign Up", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey,fontWeight: FontWeight.bold),),)
                   )
                 ],
               ),

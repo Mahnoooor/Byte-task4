@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:name/Screen2.dart';
-import 'package:name/screen3.dart';
 import 'package:name/textfield.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class Screen1 extends StatefulWidget {
-  const Screen1({Key? key}) : super(key: key);
+class Screen3 extends StatefulWidget {
+  const Screen3({Key? key}) : super(key: key);
 
   @override
-  State<Screen1> createState() => _Screen1State();
+  State<Screen3> createState() => _Screen3State();
 }
 
-class _Screen1State extends State<Screen1> {
+class _Screen3State extends State<Screen3> {
   @override
   Widget build(BuildContext context) {
     return 
@@ -44,20 +43,20 @@ class _Screen1State extends State<Screen1> {
               SizedBox(height:3.h),
               Textfield(text: 'Password',icon: Icons.visibility_off_rounded),
               SizedBox(height: 2.h,),
-              Container(
-                width: 70.w,
-  alignment:Alignment.topRight,
-  child:  TextButton(onPressed: (){},child: Text('Forget Password', textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.white),))
-),
+              Textfield(text: 'Confirm Password',icon: Icons.visibility_off_rounded),
+              SizedBox(height: 2.h,),
+     
   SizedBox(height:5.h),
-Row(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-  Text("Don't have an account", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey),),
-  TextButton(onPressed: (){Get.to(Screen3());}, child: Text("Sign up", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey, fontWeight: FontWeight.bold),)),
-    
-  ],
-),
+Container(
+                    width: 28.w,
+                    height: 8.h,
+                     decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.sp),
+                color: Color.fromARGB(255, 24, 34, 22),
+              ),
+                    
+                    child: TextButton(onPressed: (){}, child: Text("Sign Up", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey,fontWeight: FontWeight.bold),),)
+                  )
 
                   ],
                 ),
