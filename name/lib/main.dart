@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:name/Screen2.dart';
+import 'package:name/explore.dart';
 import 'package:name/screen1.dart';
+
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
      return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return GetMaterialApp(
-    home: Screen2(),
+    home: explore(),
      
     );
       }

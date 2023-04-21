@@ -5,11 +5,54 @@ import 'package:name/textfield.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class Screen2 extends StatelessWidget {
+class Screen2 extends StatefulWidget {
   const Screen2({Key? key}) : super(key: key);
 
   @override
+  State<Screen2> createState() => _Screen2State();
+}
+
+class _Screen2State extends State<Screen2> with TickerProviderStateMixin{
+   late AnimationController _animationController1;
+  late Animation<double> _animation1;
+   late AnimationController _controller;
+  late Animation<Offset> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initializing the animation controller
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
+    _controller.repeat(); // Repeating the animation indefinitely
+
+    // Creating the slide animation
+    _animation = Tween<Offset>(
+  
+  begin: Offset(-1, 0),
+  end: Offset(1, 0),
+).animate(_controller);
+
+//
+    super.initState();
+    _animationController1 = AnimationController(
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    )..repeat();
+    _animation1 = Tween(begin: 0.0, end: 1.0).animate(_animationController1);
+
+  }
+
+  @override
+  void dispose() {
+    // Disposing the animation controller when the widget is removed from the tree
+    _controller.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
+     
     return Scaffold(
       backgroundColor: Colors.black,
 body: SingleChildScrollView(
@@ -19,10 +62,14 @@ body: SingleChildScrollView(
     children: [
       SizedBox(height:4.h),
       Center(child:
-           Image(image: AssetImage('assets/search.png'),
-        width: 70.w,
-        height: 25.h,
-        )
+                 RotationTransition(
+  turns: _animation1,
+  child: Image(
+    image: AssetImage('assets/search.png'),
+    width: 70.w,
+    height: 20.h,
+  ),
+),
             
             ),
             SizedBox(height: 4.h,),
@@ -37,7 +84,10 @@ SizedBox(height: 1.h,),
               child:  Text("Track your semester activities, achieved goals and all information from here. It will help you to keep a check on your success and areas you need to work on! ", textAlign: TextAlign.center,style: TextStyle(fontSize: 16.sp,color: Colors.grey,fontFamily: 'Mulish-Light'),),
             ),
 SizedBox(height: 4.h,),
-            Container(
+            SlideTransition(
+               position: _animation,
+                child:
+              Container(
               width: 56.w,
               height: 8.h,
              
@@ -66,6 +116,7 @@ SizedBox(height: 4.h,),
                 ],
               ),
             ),
+            )
     ],
       
     
