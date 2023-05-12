@@ -54,7 +54,7 @@ class _Screen2State extends State<Screen2> with TickerProviderStateMixin{
   Widget build(BuildContext context) {
      
     return Scaffold(
-      backgroundColor: Colors.black,
+     backgroundColor: Color.fromARGB(148, 25, 51, 73),
 body: SingleChildScrollView(
   child:   Padding(
     padding: EdgeInsets.symmetric(horizontal: 7.w,vertical: 7.h),
@@ -108,7 +108,7 @@ SizedBox(height: 4.h,),
                     height: 8.h,
                      decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(10.sp),bottomRight: Radius.circular(10.sp)),
-                color: Color.fromARGB(255, 24, 34, 22),
+                color: Color.fromARGB(255, 42, 66, 75)
               ),
                     
                     child: TextButton(onPressed: (){Get.to(Screen3());}, child: Text("Sign Up", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey,fontWeight: FontWeight.bold),),)

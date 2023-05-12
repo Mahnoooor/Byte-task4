@@ -22,7 +22,7 @@ class _exploreState extends State<explore> with TickerProviderStateMixin {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.black,
+              Color.fromARGB(255, 42, 66, 75),
               Colors.black54,
             ],
           ),
@@ -33,6 +33,7 @@ class _exploreState extends State<explore> with TickerProviderStateMixin {
               duration: Duration(seconds: 5),
               vsync: this,
               child: Container(
+                
                 height: double.infinity,
                 child: Image(
                   image: AssetImage('assets/search.png'),

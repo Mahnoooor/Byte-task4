@@ -1,25 +1,39 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class Textfield extends StatelessWidget {
+class Textfield extends StatefulWidget {
+ 
   final String text;
   final IconData icon;
-  const Textfield({Key? key, required this.text, required this.icon}) : super(key: key);
+final Function(String)? validator;
+ const Textfield({Key? key, required this.text, required this.icon, this.validator, required controller}) : super(key: key);
 
   @override
+  State<Textfield> createState() => _TextfieldState();
+}
+
+class _TextfieldState extends State<Textfield> {
+   
+ final myController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
+    
     return Container(
       width: 100.w,
       child: TextFormField(
-          style: const TextStyle(color: Colors.white),//input text color
+        controller: myController,
+          style: const TextStyle(color: Colors.white),
+          //input text color
       decoration: InputDecoration(
-        hintText: text,
+        hintText: widget.text,
         hintStyle:TextStyle(color:Colors.white),
         fillColor: Colors.white.withOpacity(0.2),
        filled: true,
-       suffixIcon: Icon(icon),
+       suffixIcon: Icon(widget.icon),
    //TextStyle(fontSize: 20.0, color:Colors.white),
        focusedBorder:  OutlineInputBorder(
           borderSide:
@@ -32,7 +46,12 @@ class Textfield extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.sp),
        )
       ),
-
+ validator: (value) {
+          if (widget.validator != null) {
+            return widget.validator!(value!);
+          }
+          return null;
+        },
  ),
     );
   }

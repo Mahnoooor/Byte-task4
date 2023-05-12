@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:name/Screen2.dart';
-import 'package:name/screen1b.dart';
 import 'package:name/screen3.dart';
 import 'package:name/screen4.dart';
 import 'package:name/textfield.dart';
@@ -10,14 +9,14 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 //login
-class Screen1 extends StatefulWidget {
-  const Screen1({Key? key}) : super(key: key);
+class Screen1b extends StatefulWidget {
+  const Screen1b({Key? key}) : super(key: key);
 
   @override
-  State<Screen1> createState() => _Screen1State();
+  State<Screen1b> createState() => _Screen1bState();
 }
 
-class _Screen1State extends State<Screen1> with TickerProviderStateMixin{
+class _Screen1bState extends State<Screen1b> with TickerProviderStateMixin{
    late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -104,35 +103,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
                     children: [
                       SizedBox(height: 4.h,),
                       
-                      TextFormField(
-                      controller: name,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-        hintText: 'Name',
-        hintStyle:TextStyle(color:Colors.white),
-        fillColor: Colors.white.withOpacity(0.2),
-       filled: true,
-       suffixIcon: Icon(Icons.person,color:  Colors.white.withOpacity(0.8)),
-   //TextStyle(fontSize: 20.0, color:Colors.white),
-       focusedBorder:  OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 2.sp, color: Colors.white), 
-          borderRadius: BorderRadius.circular(15.sp),
-       ),
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 1.sp, color: Colors.grey), 
-          borderRadius: BorderRadius.circular(15.sp),
-       )
-      ),
-                     
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter your name';
-                        }
-                        return null;
-                      },
-                    ),
+                  
 
                     SizedBox(
                       height: 3.h,
@@ -177,52 +148,43 @@ FirebaseAuth _auth = FirebaseAuth.instance;
                     ),
 
                     //password
-                    TextFormField(
-                      controller: password,
-                      style: const TextStyle(color: Colors.white),
-                      obscureText: true,
-                            decoration: InputDecoration(
-        hintText: 'Password',
-        hintStyle:TextStyle(color:Colors.white),
-        fillColor: Colors.white.withOpacity(0.2),
-       filled: true,
-       suffixIcon: Icon(Icons.visibility_off_rounded,color:  Colors.white.withOpacity(0.8),),
-   //TextStyle(fontSize: 20.0, color:Colors.white),
-       focusedBorder:  OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 2.sp, color: Colors.white), 
-          borderRadius: BorderRadius.circular(15.sp),
-       ),
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 1.sp, color: Colors.grey), 
-          borderRadius: BorderRadius.circular(15.sp),
-       )
-      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter your password';
-                        } else if (value.length < 6) {
-                          return 'Password should be at least 6 characters';
-                        }
-                        return null;
-                      },
-                    ),
+  //                   TextFormField(
+  //                     controller: password,
+  //                     style: const TextStyle(color: Colors.white),
+  //                     obscureText: true,
+  //                           decoration: InputDecoration(
+  //       hintText: 'Password',
+  //       hintStyle:TextStyle(color:Colors.white),
+  //       fillColor: Colors.white.withOpacity(0.2),
+  //      filled: true,
+  //      suffixIcon: Icon(Icons.visibility_off_rounded,color:  Colors.white.withOpacity(0.8),),
+  //  //TextStyle(fontSize: 20.0, color:Colors.white),
+  //      focusedBorder:  OutlineInputBorder(
+  //         borderSide:
+  //               BorderSide(width: 2.sp, color: Colors.white), 
+  //         borderRadius: BorderRadius.circular(15.sp),
+  //      ),
+  //       enabledBorder: OutlineInputBorder(
+  //         borderSide:
+  //               BorderSide(width: 1.sp, color: Colors.grey), 
+  //         borderRadius: BorderRadius.circular(15.sp),
+  //      )
+  //     ),
+  //                     validator: (value) {
+  //                       if (value!.isEmpty) {
+  //                         return 'Please enter your password';
+  //                       } else if (value.length < 6) {
+  //                         return 'Password should be at least 6 characters';
+  //                       }
+  //                       return null;
+  //                     },
+  //                   ),
         
-         
-          SizedBox(height:3.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-          Text("Don't have an account", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey),),
-          TextButton(onPressed: (){Get.to(Screen3());}, child: Text("Sign up", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey, fontWeight: FontWeight.bold),)),
-            
-          ],
-        ),
+              
         SizedBox(height: 2.h,),
         Container(
-                      width: 26.w,
-                      height: 6.5.h,
+                      width: 35.w,
+                      height: 7.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         color: Color.fromARGB(255, 42, 66, 75),
@@ -235,17 +197,19 @@ FirebaseAuth _auth = FirebaseAuth.instance;
     await loginUser(userEmail, userPassword);
                           }
                         },
-                        child: Text(
-                          "Login",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 17.sp,
-                            color: Colors.white60,
-                            fontWeight: FontWeight.bold,
-                          ),
-                       
-                        
-                    ),)
+                        child: Center(
+                          child: Text(
+                            "Forget Password",
+                           
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.white60,
+                              fontWeight: FontWeight.bold,
+                            ),
+                                               
+                          
+                                            ),
+                        ),)
                   )
                     ],
                   ),

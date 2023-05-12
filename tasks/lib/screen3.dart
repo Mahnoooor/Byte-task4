@@ -1,9 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:name/Screen2.dart';
+import 'package:name/screen1.dart';
 import 'package:name/textfield.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
+import 'screen4.dart';
+//sign upp
 class Screen3 extends StatefulWidget {
   const Screen3({Key? key}) : super(key: key);
 
@@ -12,50 +19,201 @@ class Screen3 extends StatefulWidget {
 }
 
 class _Screen3State extends State<Screen3> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController name = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
-    return 
-       Scaffold(
-          backgroundColor: Colors.black,
-    body: SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(7.h),
-        child: Column(
-            children: [
-              SizedBox(height:3.h),
-              Center(child:
-             Image(image: AssetImage('assets/search.png'),
-          width:70.w,
-          height: 20.h,
-          )
-              
-              ),
-              SizedBox(
-                height: 5.h,
-              ),
-             Column(
+    return Scaffold(
+      backgroundColor: Color.fromARGB(148, 25, 51, 73),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(7.h),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(height: 3.h),
+                Center(
+                  child: Image(
+                    image: AssetImage('assets/search.png'),
+                    width: 70.w,
+                    height: 20.h,
+                  ),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Column(
                   children: [
-                    SizedBox(height: 4.h,),
-                    Textfield(text: 'Name', icon: Icons.person,),
-                    SizedBox(height: 3.h,),
-              Textfield(text: 'Email address',icon: Icons.email),
+                    SizedBox(
+                      height: 4.h,
+                    ),
 
-              SizedBox(height:3.h),
-              Textfield(text: 'Password',icon: Icons.visibility_off_rounded),
-              SizedBox(height: 2.h,),
-              Textfield(text: 'Confirm Password',icon: Icons.visibility_off_rounded),
-              SizedBox(height: 2.h,),
-     
-  SizedBox(height:5.h),
-Container(
-                    width: 28.w,
-                    height: 8.h,
-                     decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.sp),
-                color: Color.fromARGB(255, 24, 34, 22),
-              ),
+                    //namee
+                    TextFormField(
+                      controller: name,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+        hintText: 'Name',
+        hintStyle:TextStyle(color:Colors.white),
+        fillColor: Colors.white.withOpacity(0.2),
+       filled: true,
+       suffixIcon: Icon(Icons.person,color:  Colors.white.withOpacity(0.8)),
+   //TextStyle(fontSize: 20.0, color:Colors.white),
+       focusedBorder:  OutlineInputBorder(
+          borderSide:
+                BorderSide(width: 2.sp, color: Colors.white), 
+          borderRadius: BorderRadius.circular(15.sp),
+       ),
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+                BorderSide(width: 1.sp, color: Colors.grey), 
+          borderRadius: BorderRadius.circular(15.sp),
+       )
+      ),
+                     
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your name';
+                        }
+                        return null;
+                      },
+                    ),
+
+                    SizedBox(
+                      height: 3.h,
+                    ),
+
+////email
+
+                    TextFormField(
+                      controller: email,
+                      style: const TextStyle(color: Colors.white),
+                             decoration: InputDecoration(
+        hintText: 'Email',
+        hintStyle:TextStyle(color:Colors.white),
+        fillColor: Colors.white.withOpacity(0.2),
+       filled: true,
+       suffixIcon: Icon(Icons.email,color:  Colors.white.withOpacity(0.8)),
+   //TextStyle(fontSize: 20.0, color:Colors.white),
+       focusedBorder:  OutlineInputBorder(
+          borderSide:
+                BorderSide(width: 2.sp, color: Colors.white), 
+          borderRadius: BorderRadius.circular(15.sp),
+       ),
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+                BorderSide(width: 1.sp, color: Colors.grey), 
+          borderRadius: BorderRadius.circular(15.sp),
+       )
+      ),
+                      
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your email';
+                        } else if (!GetUtils.isEmail(value)) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
+                    ),
                     
-                    child: TextButton(onPressed: (){}, child: Text("Sign Up", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey,fontWeight: FontWeight.bold),),)
+                    SizedBox(
+                      height: 3.h,
+                    ),
+
+                    //password
+                    TextFormField(
+                      controller: password,
+                      style: const TextStyle(color: Colors.white),
+                      obscureText: true,
+                            decoration: InputDecoration(
+        hintText: 'Password',
+        hintStyle:TextStyle(color:Colors.white),
+        fillColor: Colors.white.withOpacity(0.2),
+       filled: true,
+       suffixIcon: Icon(Icons.visibility_off_rounded,color:  Colors.white.withOpacity(0.8),),
+   //TextStyle(fontSize: 20.0, color:Colors.white),
+       focusedBorder:  OutlineInputBorder(
+          borderSide:
+                BorderSide(width: 2.sp, color: Colors.white), 
+          borderRadius: BorderRadius.circular(15.sp),
+       ),
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+                BorderSide(width: 1.sp, color: Colors.grey), 
+          borderRadius: BorderRadius.circular(15.sp),
+       )
+      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your password';
+                        } else if (value.length < 6) {
+                          return 'Password should be at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+
+                  Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          Text("Already have an account", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey),),
+          TextButton(onPressed: (){Get.to(Screen1());}, child: Text("LogIn", textAlign: TextAlign.right,style: TextStyle(fontSize: 16.sp,color: Colors.grey, fontWeight: FontWeight.bold),)),
+            
+          ],
+        ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+
+                    //sign upp
+                    Container(
+                      width: 26.w,
+                      height: 7.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.sp),
+                        color: Color.fromARGB(255, 42, 66, 75),
+                      ),
+                      child: TextButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            var UserName = name.text.trim();
+                            var UserEmail = email.text.trim();
+                            var UserPassword = password.text.trim();
+
+                            try {
+                              await _auth.createUserWithEmailAndPassword(
+                                email: UserEmail,
+                                password: UserPassword,
+                              ).then((value) {
+                                print('user created');
+                                Get.to(Post());
+                              });
+                            } catch (e) {
+                              print(e.toString());
+                            }
+                          }
+                        },
+                        child: Text(
+                          "Sign Up",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                       
+                        
+                    ),)
                   )
 
                   ],
@@ -66,6 +224,7 @@ Container(
         ),
       ),
     ),
+      )
         );
      
    

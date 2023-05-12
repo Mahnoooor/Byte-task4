@@ -37,6 +37,14 @@ dependencies:
   google_fonts: ^4.0.3
   get: ^4.6.5
   responsive_sizer: ^3.1.1
+  firebase_auth: ^4.4.2
+  firebase_core: ^2.10.0
+  firebase_storage: ^11.1.1
+  cloud_firestore: ^4.5.2
+  fluttertoast: ^8.2.1
+  firebase_core_web: ^2.3.0
+  image_picker: ^0.8.7+4
+  dotted_border: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:
