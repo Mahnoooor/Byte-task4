@@ -17,42 +17,45 @@ final Function(String)? validator;
 }
 
 class _TextfieldState extends State<Textfield> {
-   
+   final _formKey = GlobalKey<FormState>();
  final myController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     
-    return Container(
-      width: 100.w,
-      child: TextFormField(
-        controller: myController,
-          style: const TextStyle(color: Colors.white),
-          //input text color
-      decoration: InputDecoration(
-        hintText: widget.text,
-        hintStyle:TextStyle(color:Colors.white),
-        fillColor: Colors.white.withOpacity(0.2),
-       filled: true,
-       suffixIcon: Icon(widget.icon),
-   //TextStyle(fontSize: 20.0, color:Colors.white),
-       focusedBorder:  OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 2.sp, color: Colors.white), 
-          borderRadius: BorderRadius.circular(15.sp),
-       ),
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 1.sp, color: Colors.grey), 
-          borderRadius: BorderRadius.circular(15.sp),
-       )
+    return Form(
+      key: _formKey,
+      child: Container(
+        width: 100.w,
+        child: TextFormField(
+          controller: myController,
+            style: const TextStyle(color: Colors.white),
+            //input text color
+        decoration: InputDecoration(
+          hintText: widget.text,
+          hintStyle:TextStyle(color:Colors.white),
+          fillColor: Colors.white.withOpacity(0.2),
+         filled: true,
+         suffixIcon: Icon(widget.icon),
+       //TextStyle(fontSize: 20.0, color:Colors.white),
+         focusedBorder:  OutlineInputBorder(
+            borderSide:
+                  BorderSide(width: 2.sp, color: Colors.white), 
+            borderRadius: BorderRadius.circular(15.sp),
+         ),
+          enabledBorder: OutlineInputBorder(
+            borderSide:
+                  BorderSide(width: 1.sp, color: Colors.grey), 
+            borderRadius: BorderRadius.circular(15.sp),
+         )
+        ),
+     validator: (value) {
+            if (widget.validator != null) {
+              return widget.validator!(value!);
+            }
+            return null;
+          },
+     ),
       ),
- validator: (value) {
-          if (widget.validator != null) {
-            return widget.validator!(value!);
-          }
-          return null;
-        },
- ),
     );
   }
 }

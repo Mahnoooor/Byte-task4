@@ -103,111 +103,43 @@ FirebaseAuth _auth = FirebaseAuth.instance;
                Column(
                     children: [
                       SizedBox(height: 4.h,),
-                      
-                      TextFormField(
-                      controller: name,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-        hintText: 'Name',
-        hintStyle:TextStyle(color:Colors.white),
-        fillColor: Colors.white.withOpacity(0.2),
-       filled: true,
-       suffixIcon: Icon(Icons.person,color:  Colors.white.withOpacity(0.8)),
-   //TextStyle(fontSize: 20.0, color:Colors.white),
-       focusedBorder:  OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 2.sp, color: Colors.white), 
-          borderRadius: BorderRadius.circular(15.sp),
-       ),
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 1.sp, color: Colors.grey), 
-          borderRadius: BorderRadius.circular(15.sp),
-       )
-      ),
-                     
-                      validator: (value) {
+
+                      Formfields(text: 'Name', icon: Icons.person, controller: name,validator:(value) {
                         if (value!.isEmpty) {
                           return 'Please enter your name';
                         }
                         return null;
-                      },
-                    ),
+                      },),
 
                     SizedBox(
                       height: 3.h,
                     ),
 
 ////email
-
-                    TextFormField(
-                      controller: email,
-                      style: const TextStyle(color: Colors.white),
-                             decoration: InputDecoration(
-        hintText: 'Email',
-        hintStyle:TextStyle(color:Colors.white),
-        fillColor: Colors.white.withOpacity(0.2),
-       filled: true,
-       suffixIcon: Icon(Icons.email,color:  Colors.white.withOpacity(0.8)),
-   //TextStyle(fontSize: 20.0, color:Colors.white),
-       focusedBorder:  OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 2.sp, color: Colors.white), 
-          borderRadius: BorderRadius.circular(15.sp),
-       ),
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 1.sp, color: Colors.grey), 
-          borderRadius: BorderRadius.circular(15.sp),
-       )
-      ),
-                      
-                      validator: (value) {
-                        if (value!.isEmpty) {
+Formfields(text: 'email', icon: Icons.email, controller:email,validator: (value) {
+                        if (value.isEmpty) {
                           return 'Please enter your email';
                         } else if (!GetUtils.isEmail(value)) {
                           return 'Please enter a valid email';
                         }
                         return null;
-                      },
-                    ),
+                      },),
+
+                   
                     
                     SizedBox(
                       height: 3.h,
                     ),
-
-                    //password
-                    TextFormField(
-                      controller: password,
-                      style: const TextStyle(color: Colors.white),
-                      obscureText: true,
-                            decoration: InputDecoration(
-        hintText: 'Password',
-        hintStyle:TextStyle(color:Colors.white),
-        fillColor: Colors.white.withOpacity(0.2),
-       filled: true,
-       suffixIcon: Icon(Icons.visibility_off_rounded,color:  Colors.white.withOpacity(0.8),),
-   //TextStyle(fontSize: 20.0, color:Colors.white),
-       focusedBorder:  OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 2.sp, color: Colors.white), 
-          borderRadius: BorderRadius.circular(15.sp),
-       ),
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-                BorderSide(width: 1.sp, color: Colors.grey), 
-          borderRadius: BorderRadius.circular(15.sp),
-       )
-      ),
-                      validator: (value) {
+    //password            
+Formfields(text: 'Password', icon: Icons.visibility_off_rounded, controller: password,validator:(value) {
                         if (value!.isEmpty) {
                           return 'Please enter your password';
                         } else if (value.length < 6) {
                           return 'Password should be at least 6 characters';
                         }
                         return null;
-                      },
-                    ),
+                      } ,),
+               
         
          
           SizedBox(height:3.h),
@@ -259,6 +191,46 @@ FirebaseAuth _auth = FirebaseAuth.instance;
         );
      
    
+  }
+}
+
+class Formfields extends StatelessWidget {
+    final String text;
+  final IconData icon;
+final Function(String)? validator;
+  const Formfields({
+    super.key,
+    required this.text, required this.icon, this.validator, required this.controller,
+  });
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      style: const TextStyle(color: Colors.white),
+             decoration: InputDecoration(
+        hintText: text,
+        hintStyle:TextStyle(color:Colors.white),
+        fillColor: Colors.white.withOpacity(0.2),
+       filled: true,
+       suffixIcon: Icon(icon,color:  Colors.white.withOpacity(0.8)),
+   //TextStyle(fontSize: 20.0, color:Colors.white),
+       focusedBorder:  OutlineInputBorder(
+          borderSide:
+                BorderSide(width: 2.sp, color: Colors.white), 
+          borderRadius: BorderRadius.circular(15.sp),
+       ),
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+                BorderSide(width: 1.sp, color: Colors.grey), 
+          borderRadius: BorderRadius.circular(15.sp),
+       )
+      ),
+      
+
+    );
   }
 }
 

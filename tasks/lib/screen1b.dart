@@ -147,7 +147,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
                       height: 3.h,
                     ),
 
-                    //password
+  //                   password
   //                   TextFormField(
   //                     controller: password,
   //                     style: const TextStyle(color: Colors.white),
